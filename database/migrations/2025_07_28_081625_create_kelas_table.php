@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('uuid',100);
-            $table->string('nama_kelas',255);
+            $table->string('nama_kelas',100);
+            $table->foreignId('sekolah_id')->constrained('sekolah')->onDelete('restrict')->onUpdate('cascade');
+            $table->string('tahunting');
+            $table->integer('tahun')->unsigned();
+            $table->foreignId('guru_kelas1')->constrained('users')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignId('guru_kelas2')->nullable()->constrained('users')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
     }
